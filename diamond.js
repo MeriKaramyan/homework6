@@ -22,27 +22,4 @@ const printDiamondUsingFor = function(height, char) {
         console.log(' '.repeat(spaceCount) + char.repeat(charCount));
     }
 };
-printDiamondUsingFor(5, '@');
-
-
-
-
-
-/*
-
-    height = 5
-  @
- @@@
-@@@@@@
- @@@
-  @
-
-    height = 7
-   @                3 space, 1 char, row = 1  charCount = row * 2 + 1
-  @@@               2 space, 3 char, row = 2  spaceCount = (height - charCount) / 2
- @@@@@              1 space, 5 char, row = 3
-@@@@@@@             0 space, 7 char, row = 4
- @@@@@
-  @@@
-   @
-*/
+printDiamondUsingFor(10, '@');
