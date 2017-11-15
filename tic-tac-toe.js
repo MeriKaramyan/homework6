@@ -9,9 +9,6 @@ const rand = function(num) {
 };
 
 canvas.addEventListener('click', function(evt) {
-    //evt.offsetX - x of where the user clicked
-    //evt.offsetY - y of where the user clicked
-    //Determine which position the user clicked in and call makeMove with that position
     if (isGameOver) {
         return;
     }
@@ -43,8 +40,6 @@ const update = function() {
     }
 }
 
-// Function checks if there is a row, column or diagonal with 2 given chars
-// That means that we must choose the empty position on that row, column or diagonal.
 const getWinningPosition = function(board, char) {
     const size = board.length;
     let horizontalCharsCount = 0, verticalCharsCount = 0, horizontalEmptyIndex = -1, verticalEmptyIndex = -1;
@@ -55,15 +50,13 @@ const getWinningPosition = function(board, char) {
         verticalCharsCount = 0;
         horizontalEmptyIndex = -1;
         verticalEmptyIndex = -1;
-
-        // Counting given chars count and empty position on the diagonal 1
+        
         if (board[i][i] === char) {
             diagonal1CharsCount++;
         } else if (board[i][i] === ' ') {
             diagonal1EmptyIndex = i;
         }
 
-        // Counting given chars count and empty position on the diagonal 2
         if (board[i][size - i - 1] === char) {
             diagonal2CharsCount++;
         } else if (board[i][size - i - 1] === ' ') {
@@ -71,14 +64,12 @@ const getWinningPosition = function(board, char) {
         }
 
         for (let j = 0; j < size; j++) {
-            // Counting given chars count and empty position on the row i
             if (board[i][j] === char) {
                 horizontalCharsCount++;
             } else if (board[i][j] === ' ') {
                 horizontalEmptyIndex = j;
             }
 
-            // Counting given chars count and empty position on the column i
             if (board[j][i] === char) {
                 verticalCharsCount++;
             } else if (board[j][i] === ' ') {
@@ -86,23 +77,19 @@ const getWinningPosition = function(board, char) {
             }
         }
 
-        // If the i-th row contains 2  chars then we are returning the empty position
         if (horizontalCharsCount === size - 1 && horizontalEmptyIndex !== -1) {
             return [i, horizontalEmptyIndex];
         }
 
-        // If the i-th column contains 2  chars then we are returning the empty position
         if (verticalCharsCount === size - 1 && verticalEmptyIndex !== -1) {
             return [verticalEmptyIndex, i];
         }
     }
 
-    // If the diagonal #1 contains 2  chars then we are returning the empty position
     if (diagonal1CharsCount === size - 1 && diagonal1EmptyIndex !== -1) {
         return [diagonal1EmptyIndex, diagonal1EmptyIndex];
     }
 
-    // If the diagonal #2 contains 2  chars then we are returning the empty position
     if (diagonal2CharsCount === size - 1 && diagonal2EmptyIndex !== -1) {
         return [diagonal2EmptyIndex, size - diagonal2EmptyIndex - 1];
     }
@@ -409,7 +396,6 @@ const drawBoard = function(board) {
         ctx.stroke();
     }
 
-    // Draw chars
     let img;
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board.length; j++) {
